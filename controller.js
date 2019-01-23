@@ -1,9 +1,9 @@
-const Cake = require("./models");
+const Model = require("./models");
 
 module.exports = {
     index: function(req, res) {
         console.log('first route');
-        Cake.find({})
+        Model.Cakes.find({})
             .then(results =>{
                 console.log('collecting' + results);
                 res.json(results);
@@ -14,14 +14,18 @@ module.exports = {
     },
 
     bake: function(req, res) {
-        Cake.create(req.body)
+        Model.Cakes.create(req.body)
             .then(result => res.json(result))
             .catch(err => res.json(err))
     },
 
     rate: function(req, res) {
         console.log(req.params.id + " " + req.body)
-        Cake.findByIdAndUpdate(req.params.id, {$push:{ratings:req.body}})
+        const newcomment = Model.Rates.create(req.body)
+            .then(result => res.json(result))
+            .catch(err => res.json(err))
+
+        Model.Cakes.findByIdAndUpdate(req.params.id, {$push:{ratings:req.body}})
             .then(result => res.json(result))
             .catch(err => res.json(err));
     }

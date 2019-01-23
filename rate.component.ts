@@ -9,6 +9,7 @@ import { HttpService } from '../http.service';
 export class RateComponent implements OnInit {
   @Input() cake: any;
   newRating: any;
+  rateErrs: any;
 
   constructor(private _httpService: HttpService) { }
 
@@ -19,6 +20,7 @@ export class RateComponent implements OnInit {
   rateCake() {
     const observer = this._httpService.sendRating(this.cake, this.newRating);
     observer.subscribe(data => {
+      this.rateErrs = data;
       console.log(data);
     })
     console.log('I see stars')

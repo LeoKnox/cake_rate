@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   newCake: any;
   allCake: any;
   selectedCake: any;
+  createErrs: any;
 
   ngOnInit() {
     this.newCake = {baker:"", url:""};
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
 
   bakeCake() {
     this._httpService.bakeCakes(this.newCake).subscribe(added => {
-      console.log('added ' + added);
+      this.createErrs = added;
+      console.log(added);
     })
     console.log('cakes!')
   }

@@ -9,11 +9,18 @@
       <p>Baker Name</p>
       <input 
         type="text"
-        name="newCake.baker"
-        [(ngModel)]="newCake.baker">
+        name="baker"
+        required
+        minlength="3"
+        [(ngModel)]="newCake.baker"
+        #baker="ngModel">
       <p>Image url:</p>
       <input type="text" name="newCake.url" [(ngModel)]="newCake.url">
       <button (click)="bakeCake()">Submit</button>
+      <div *ngIf="createErrs">
+        <p *ngIf="createErrs.errors.baker">{{ createErrs.errors.baker.message }}</p>
+        <p *ngIf="createErrs.errors.url">{{ createErrs.errors.url.message }}</p>
+      </div>
     </form>
   </div>
   {{ newCake | json }}
