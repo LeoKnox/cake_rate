@@ -1,0 +1,9 @@
+<p>
+  {{cakeToShow.baker}}
+</p>
+<img [src]="cakeToShow.url" [alt]="cakeToShow.url">
+<div *ngIf="cakeToShow.ratings">
+  <ul *ngFor="let cc of cakeToShow.ratings">
+    <li>{{ cc.stars}} stars! {{ cc.comments }}</li>
+  </ul>
+</div>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,15 @@ export class HttpService {
   }
   
   getCakes() {
-    let tempObservable = this._http.get('/');
-    tempObservable.subscribe(data => console.log("Got out cakes!", data));
+    return this._http.get('/cake');
+  }
+
+  bakeCakes(newcake) {
+    console.log(newcake);
+    return this._http.post('/cake', newcake);
+  }
+
+  sendRating(id, rating) {
+    return this._http.patch('/cake/' + id, rating);
   }
 }

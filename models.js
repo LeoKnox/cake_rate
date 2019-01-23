@@ -6,10 +6,15 @@ mongoose.connect('mongodb://localhost/cake_api', (err)=>{
     }
 });
 
-var CakeSchema = new mongoose.Schema({
-    baker: {type:String},
+const RatingSchema = new mongoose.Schema({
+    // rating schema
     stars: [Number],
     comments: [String]
+})
+var CakeSchema = new mongoose.Schema({
+    baker: {type:String, minlength:[3,"More than 3 characters"]},
+    url: {type:String, required:[true,"Please link image"]},
+    ratings: [RatingSchema]
 }, {timestamps: true})
 
 module.exports = mongoose.model('Cakes', CakeSchema);

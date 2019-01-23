@@ -7,16 +7,24 @@
     <p>Submit a cake to be rated</p>
     <form>
       <p>Baker Name</p>
-      <input type="text" value="baker">
+      <input 
+        type="text"
+        name="newCake.baker"
+        [(ngModel)]="newCake.baker">
       <p>Image url:</p>
-      <input type="text" value="imgurl">
-      <button>Submit</button>
+      <input type="text" name="newCake.url" [(ngModel)]="newCake.url">
+      <button (click)="bakeCake()">Submit</button>
     </form>
   </div>
+  {{ newCake | json }}
   <div id="cakelist">
-    <ul>
-      <li>cake here</li>
+    <ul *ngFor="let x of allCake">
+      <li>{{ x.baker }}<img [src]="x.url" [alt]="x.url" (click)="showCake(x)" width=200></li>
+      <app-rate [cake]="x._id"></app-rate><br>
     </ul>
+  </div>
+  <div>
+    <app-cake *ngIf="selectedCake" [cakeToShow]="selectedCake"></app-cake>
   </div>
 </div>
 
